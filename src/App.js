@@ -12,24 +12,26 @@ class App extends Component {
     }
     this.handleButtonClick = this.handleButtonClick.bind(this);
   }*/
-  // Defining state as a Class field means we can avoid doing it in the constructor
+  // state as a Class field means we can avoid defining it in the constructor
   state = {
     numQuestions: 0,
     numCorrect: 0
   };
-  /*handleButtonClick(e) { // <- this form means we need to bind 'this' in constructor
+  /*handleButtonClick(e) {
+    // this form means we need to bind 'this' in constructor
     console.log('e.target', e.target.innerText);
     this.setState(currState => ({
       numQuestions: currState.numQuestions + 1
     }))
   }*/
   handleButtonClick = isCorrect => {
-    // <- this form doesn't require bind 'this' in constructor
+    // this form doesn't require bind 'this' in constructor
     this.setState(currState => ({
       numQuestions: currState.numQuestions + 1,
       numCorrect: isCorrect ? currState.numCorrect + 1 : currState.numCorrect
     }));
   };
+  // this form allows us to avoid arrow & bind in render() when used with .map()
   renderGame = game => <Game onButtonClick={this.handleButtonClick} />;
 
   render() {
@@ -41,12 +43,12 @@ class App extends Component {
           <p>Exercise - Managing State</p>
         </header>
         <main className="App-main">
-          <Game onButtonClick={this.handleButtonClick} />
           {/*
             // These cause re-render of Game components
-            <Game key='2' onButtonClick={this.handleButtonClick.bind(this)} />
-            <Game key='2' onButtonClick={(e) => this.handleButtonClick(e)} />
+            <Game onButtonClick={(e) => this.handleButtonClick(e)} />
+            <Game onButtonClick={this.handleButtonClick.bind(this)} />
             */}
+          <Game onButtonClick={this.handleButtonClick} />
           {this.renderGame()}
           <Score
             numQuestions={this.state.numQuestions}
