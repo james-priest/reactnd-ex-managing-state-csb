@@ -117,7 +117,7 @@ button:hover {
   .equation {
     margin: 10px 0;
   }
-  .text {
+  .equation .text {
     font-size: 0.85em;
   }
   button {
